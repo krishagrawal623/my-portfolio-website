@@ -21,7 +21,12 @@ export function zeroPrefix(value) {
 
 export function readingTime(text) {
   const wpm = 225;
+
+  if (typeof text !== 'string') {
+    console.error('readingTime expected a string but received:', text);
+    return 0;
+  }
+
   const words = text.trim().split(/\s+/).length;
-  const time = words / wpm;
-  return time * 1000 * 60;
+  return (words / wpm) * 1000 * 60;
 }

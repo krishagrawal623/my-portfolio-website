@@ -4,11 +4,12 @@ abstract: How I designed and built a full-stack developer Q&A platform from scra
 date: '2026-07-18'
 banner: /static/building-intelliq-banner.jpg
 featured: true
+readingTime: '6 min read'
 ---
 
 ## The Concept
 
-Every developer, at some point, has spent hours browsing Stack Overflow. While using it is second nature, building a collaborative, reputation-based Q&A platform is a completely different challenge. I wanted to design a modern platform—**IntelliQ**—where developers could ask questions, vote on content, answer discussions, and track developer reputation scores in real time. 
+Every developer, at some point, has spent hours browsing Stack Overflow. While using it is second nature, building a collaborative, reputation-based Q&A platform is a completely different challenge. I wanted to design a modern platform—**IntelliQ**—where developers could ask questions, vote on content, answer discussions, and track developer reputation scores in real time.
 
 My goal was to create a sleek user experience that combines high performance, secure data layers, and responsiveness on any device.
 
@@ -18,29 +19,33 @@ My goal was to create a sleek user experience that combines high performance, se
 
 To build a scalable and responsive web app, I chose a modern toolset:
 
-* **Frontend Framework**: **Next.js 16** (App Router & React Server Components). Next.js allowed me to pre-render public Q&A pages for search engine optimization (SEO) while maintaining dynamic client-side interactivity.
-* **Styling & Motion**: **Tailwind CSS**, **Framer Motion**, and **Magic UI**. I wanted fluid, premium transitions and micro-animations to make the dashboard feel alive.
-* **Backend as a Service (BaaS)**: **Appwrite**. It handled user authentication, storage for image uploads, and real-time database subscriptions out of the box.
-* **State Management**: **Zustand**. For managing user details, reputations, and interactive states across the application without prop-drilling.
+- **Frontend Framework**: **Next.js 16** (App Router & React Server Components). Next.js allowed me to pre-render public Q&A pages for search engine optimization (SEO) while maintaining dynamic client-side interactivity.
+- **Styling & Motion**: **Tailwind CSS**, **Framer Motion**, and **Magic UI**. I wanted fluid, premium transitions and micro-animations to make the dashboard feel alive.
+- **Backend as a Service (BaaS)**: **Appwrite**. It handled user authentication, storage for image uploads, and real-time database subscriptions out of the box.
+- **State Management**: **Zustand**. For managing user details, reputations, and interactive states across the application without prop-drilling.
 
 ---
 
 ## Key Technical Challenges
 
 ### 1. Real-Time Data & Reputation Tracking
-A Q&A platform lives on user contributions, which are driven by reputation points. To compute reputation scores, I set up a calculation system where upvotes, downvotes, and selected answers update a user's profile score dynamically. 
+
+A Q&A platform lives on user contributions, which are driven by reputation points. To compute reputation scores, I set up a calculation system where upvotes, downvotes, and selected answers update a user's profile score dynamically.
 
 By leveraging **Appwrite's Realtime API**, client sessions subscribe to document changes. As soon as a user clicks the "Upvote" button, the reputation score transitions immediately for all active viewers using Framer Motion.
 
 ### 2. Rich Text Markdown Editing & Media Uploads
-Developers need to paste code blocks and images easily. I integrated a rich-text Markdown editor with Appwrite Storage. 
+
+Developers need to paste code blocks and images easily. I integrated a rich-text Markdown editor with Appwrite Storage.
 
 When a user drags and drops a screenshot into the editor, the app uploads the file asynchronously to an Appwrite bucket, returns a secure preview URL, and automatically inserts the Markdown image syntax `![Alt Text](URL)` at the user's cursor position.
 
 ### 3. Server Components vs. Client Interactivity
-One architectural challenge was deciding where to split React Server Components (RSC) and Client Components. 
-* **Questions List & Profiles** are rendered as server components to minimize bundle size and speed up page load speeds.
-* **Voting buttons, Markdown inputs, and search fields** are dynamically loaded as client components for instant interactivity.
+
+One architectural challenge was deciding where to split React Server Components (RSC) and Client Components.
+
+- **Questions List & Profiles** are rendered as server components to minimize bundle size and speed up page load speeds.
+- **Voting buttons, Markdown inputs, and search fields** are dynamically loaded as client components for instant interactivity.
 
 ---
 
