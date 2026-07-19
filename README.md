@@ -17,10 +17,6 @@
   <a href="https://krishagrawal23.vercel.app">
     🌐 Live Website
   </a>
-  &nbsp; • &nbsp;
-  <a href="https://github.com/krishagrawal623/my-portfolio-website">
-    💻 Source Code
-  </a>
 </p>
 
 ---
