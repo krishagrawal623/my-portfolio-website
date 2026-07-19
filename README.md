@@ -2,7 +2,7 @@
   <img src="/public/favicon.svg" width="90" alt="Krish Agrawal Logo" />
 </p>
 
-<h1 align="left">
+<h1 align="center">
   Krish Agrawal — Developer Portfolio
 </h1>
 
@@ -11,8 +11,8 @@
 </p>
 
 <p align="left">
-  A modern, responsive portfolio website showcasing my projects, technical expertise, 
-  research interests, and journey as a Computer Science student building intelligent applications.
+  A curated collection of my work, experiments, and ideas in AI, software engineering, and emerging technologies — built with curiosity,
+  creativity, and code.
 </p>
 
 <p align="left">
@@ -24,9 +24,6 @@
     💻 Source Code
   </a>
   &nbsp; • &nbsp;
-  <a href="https://www.linkedin.com/in/krishagrawal75/">
-    🔗 LinkedIn
-  </a>
 </p>
 
 ---
