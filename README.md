@@ -6,9 +6,7 @@
   Krish Agrawal — Developer Portfolio
 </h1>
 
-<p align="left">
-  <b>AI • Machine Learning • NLP • Full-Stack Development</b>
-</p>
+
 
 <p align="left">
   A curated collection of my work, experiments, and ideas in AI, software engineering, and emerging technologies — built with curiosity,
@@ -23,7 +21,6 @@
   <a href="https://github.com/krishagrawal623/my-portfolio-website">
     💻 Source Code
   </a>
-  &nbsp; • &nbsp;
 </p>
 
 ---
