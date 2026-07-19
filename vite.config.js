@@ -35,7 +35,7 @@ export default defineConfig({
       providerImportSource: '@mdx-js/react',
     }),
     remix({
-      // presets: [vercelPreset()],
+      presets: [vercelPreset()],
       routes(defineRoutes) {
         return defineRoutes(route => {
           route('/', 'routes/home/route.js', { index: true });

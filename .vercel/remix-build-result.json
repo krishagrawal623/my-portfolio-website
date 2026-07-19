@@ -65,7 +65,7 @@
         }
       },
       "routes/contact": {
-        "file": "app/routes/contact/route.js",
+        "file": "app/routes/contact/route.jsx",
         "id": "routes/contact",
         "path": "contact",
         "parentId": "root",
@@ -159,7 +159,7 @@
         "parentId": "root"
       },
       "routes/contact": {
-        "file": "routes/contact/route.js",
+        "file": "routes/contact/route.jsx",
         "id": "routes/contact",
         "path": "contact",
         "parentId": "root"
