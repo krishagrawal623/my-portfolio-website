@@ -7,10 +7,10 @@ export default {
 
 const imageData = {
   alt: 'An abstract purple and pink neon thing',
-  src: '/static/modern-styling-in-react-banner.jpg',
+  src: '/static/building-intelliq-banner.jpg',
   width: 960,
   height: 540,
-  placeholder: '/static/modern-styling-in-react-banner-placeholder.jpg',
+  placeholder: '/static/building-intelliq-banner-placeholder.jpg',
 };
 
 const Story = args => (

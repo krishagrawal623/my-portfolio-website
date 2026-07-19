@@ -14,50 +14,11 @@ import { useRef, useState } from 'react';
 import { cssProps, msToNum, numToMs } from '~/utils/style';
 import { baseMeta } from '~/utils/meta';
 import { Form, useActionData, useNavigation, useLoaderData } from '@remix-run/react';
-import { json } from '@remix-run/cloudflare';
-import { SESClient, SendEmailCommand } from '@aws-sdk/client-ses';
+import { json } from '@remix-run/node';
 import styles from './contact.module.css';
 
-async function getEnvVars(context) {
-  const env = {
-    AWS_ACCESS_KEY_ID: context?.cloudflare?.env?.AWS_ACCESS_KEY_ID || process.env.AWS_ACCESS_KEY_ID,
-    AWS_SECRET_ACCESS_KEY: context?.cloudflare?.env?.AWS_SECRET_ACCESS_KEY || process.env.AWS_SECRET_ACCESS_KEY,
-    EMAIL: context?.cloudflare?.env?.EMAIL || process.env.EMAIL,
-    FROM_EMAIL: context?.cloudflare?.env?.FROM_EMAIL || process.env.FROM_EMAIL,
-    WEB3FORMS_ACCESS_KEY: context?.cloudflare?.env?.WEB3FORMS_ACCESS_KEY || process.env.WEB3FORMS_ACCESS_KEY,
-  };
-
-  // In local development, read from .dev.vars manually if wrangler dev proxy hasn't populated them
-  if (process.env.NODE_ENV === 'development') {
-    try {
-      const fs = await import('node:fs');
-      const path = await import('node:path');
-      const devVarsPath = path.resolve(process.cwd(), '.dev.vars');
-      if (fs.existsSync(devVarsPath)) {
-        const content = fs.readFileSync(devVarsPath, 'utf8');
-        const lines = content.split('\n');
-        for (const line of lines) {
-          const [key, ...valueParts] = line.split('=');
-          if (key && valueParts.length > 0) {
-            const k = key.trim();
-            const v = valueParts.join('=').trim();
-            if (k in env && !env[k]) {
-              env[k] = v;
-            }
-          }
-        }
-      }
-    } catch (e) {
-      console.warn('Could not read .dev.vars:', e);
-    }
-  }
-
-  return env;
-}
-
-export async function loader({ context }) {
-  const env = await getEnvVars(context);
-  return json({ web3FormsKey: env.WEB3FORMS_ACCESS_KEY || '' });
+export async function loader() {
+  return json({ web3FormsKey: process.env.WEB3FORMS_ACCESS_KEY || '' });
 }
 
 export const meta = () => {
@@ -72,11 +33,11 @@ const MAX_EMAIL_LENGTH = 512;
 const MAX_MESSAGE_LENGTH = 4096;
 const EMAIL_PATTERN = /(.+)@(.+){2,}\.(.+){2,}/;
 
-export async function action({ context, request }) {
+export async function action({ request }) {
   const formData = await request.formData();
   const email = String(formData.get('email'));
   const message = String(formData.get('message'));
-  
+
   // Validation
   const errors = {};
   if (!email || !EMAIL_PATTERN.test(email)) {
@@ -96,46 +57,13 @@ export async function action({ context, request }) {
     return json({ errors });
   }
 
-  const env = await getEnvVars(context);
-
-  if (env.AWS_ACCESS_KEY_ID && env.AWS_SECRET_ACCESS_KEY && env.EMAIL) {
-    const ses = new SESClient({
-      region: 'us-east-1',
-      credentials: {
-        accessKeyId: env.AWS_ACCESS_KEY_ID,
-        secretAccessKey: env.AWS_SECRET_ACCESS_KEY,
-      },
-    });
-
-    // Send email via Amazon SES
-    await ses.send(
-      new SendEmailCommand({
-        Destination: {
-          ToAddresses: [env.EMAIL],
-        },
-        Message: {
-          Body: {
-            Text: {
-              Data: `From: ${email}\n\n${message}`,
-            },
-          },
-          Subject: {
-            Data: `Portfolio message from ${email}`,
-          },
-        },
-        Source: `Portfolio <${env.FROM_EMAIL || 'portfolio@local'}>`,
-        ReplyToAddresses: [email],
-      })
-    );
-  } else {
-    // Fallback: log locally when env variables are not configured (local dev)
-    console.info('Contact submission (local fallback):', { email, message });
-  }
+  // Server-side fallback. Submission happens client-side via Web3Forms.
+  console.info('Contact submission (server):', { email, message });
 
   return json({ success: true });
 }
 
-export const Contact = () => {
+export default function Contact() {
   const errorRef = useRef();
   const email = useFormInput('');
   const message = useFormInput('');
@@ -144,7 +72,6 @@ export const Contact = () => {
   const { state } = useNavigation();
 
   const { web3FormsKey } = useLoaderData() || {};
-  console.log('DEBUG: web3FormsKey on client =', web3FormsKey);
   const [clientSuccess, setClientSuccess] = useState(false);
   const [clientSending, setClientSending] = useState(false);
   const [clientError, setClientError] = useState('');
@@ -153,7 +80,7 @@ export const Contact = () => {
   const success = actionData?.success || clientSuccess;
   const errors = actionData?.errors || (clientError ? { message: clientError } : null);
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async event => {
     if (!web3FormsKey) {
       console.log('DEBUG: No web3FormsKey found, falling back to server action.');
       return;
@@ -163,7 +90,6 @@ export const Contact = () => {
     setClientSending(true);
     setClientError('');
 
-    console.log('DEBUG: Submitting to Web3Forms client-side with key:', web3FormsKey);
     try {
       const response = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
@@ -180,14 +106,12 @@ export const Contact = () => {
       });
 
       const result = await response.json();
-      console.log('DEBUG: Web3Forms raw response result =', result);
       if (result.success) {
         setClientSuccess(true);
       } else {
         setClientError(result.message || 'Failed to send message via Web3Forms.');
       }
     } catch (err) {
-      console.error('DEBUG: Web3Forms submit error =', err);
       setClientError(err.message || 'Failed to send message.');
     } finally {
       setClientSending(false);
@@ -199,7 +123,6 @@ export const Contact = () => {
       <Transition unmount in={!success} timeout={1600}>
         {({ status, nodeRef }) => (
           <Form
-            unstable_viewTransition
             className={styles.form}
             method="post"
             onSubmit={handleSubmit}
@@ -267,8 +190,7 @@ export const Contact = () => {
                   <div className={styles.formErrorContent} ref={errorRef}>
                     <div className={styles.formErrorMessage}>
                       <Icon className={styles.formErrorIcon} icon="error" />
-                      {errors?.email}
-                      {errors?.message}
+                      {Object.values(errors || {}).filter(Boolean).join(' ')}
                     </div>
                   </div>
                 </div>
@@ -327,7 +249,7 @@ export const Contact = () => {
       <Footer className={styles.footer} />
     </Section>
   );
-};
+}
 
 function getDelay(delayMs, offset = numToMs(0), multiplier = 1) {
   const numDelay = msToNum(delayMs) * multiplier;

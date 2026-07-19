@@ -17,11 +17,10 @@ export const Link = forwardRef(
     const relValue = rel || (isExternal ? 'noreferrer noopener' : undefined);
     const targetValue = target || (isExternal ? '_blank' : undefined);
 
-    const linkProps = {
+    const commonProps = {
       className: classes(styles.link, className),
       ['data-secondary']: secondary,
       rel: relValue,
-      href: href,
       target: targetValue,
       ref: ref,
       ...rest,
@@ -29,14 +28,14 @@ export const Link = forwardRef(
 
     if (isAnchor(href)) {
       return (
-        <a {...linkProps} href={href}>
+        <a {...commonProps} href={href}>
           {children}
         </a>
       );
     }
 
     return (
-      <RouterLink unstable_viewTransition prefetch="intent" {...linkProps} to={href}>
+      <RouterLink prefetch="intent" {...commonProps} to={href}>
         {children}
       </RouterLink>
     );

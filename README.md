@@ -79,14 +79,7 @@ Deploy using your preferred platform such as:
 
 ---
 
-## 🙏 Credits
 
-This portfolio is **based on the open-source portfolio template created by Hamish Williams** and has been customized with my own content, projects, styling, and additional features.
-
-Original repository:
-https://github.com/HamishMW/portfolio
-
----
 
 ## 📄 License
 

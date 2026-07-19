@@ -10,14 +10,13 @@ function isExternalLink(href) {
   return href?.includes('://');
 }
 
-export const Button = forwardRef(({ href, ...rest }, ref) => {
-  if (isExternalLink(href) || !href) {
+export const Button = forwardRef(({ href, external, ...rest }, ref) => {
+  if (external || isExternalLink(href) || !href) {
     return <ButtonContent href={href} ref={ref} {...rest} />;
   }
 
   return (
     <ButtonContent
-      unstable_viewTransition
       as={Link}
       prefetch="intent"
       to={href}
@@ -51,6 +50,7 @@ const ButtonContent = forwardRef(
     const isExternal = isExternalLink(href);
     const defaultComponent = href ? 'a' : 'button';
     const Component = as || defaultComponent;
+    const isLinkComponent = Component === Link;
 
     return (
       <Component
@@ -59,7 +59,7 @@ const ButtonContent = forwardRef(
         data-icon-only={iconOnly}
         data-secondary={secondary}
         data-icon={icon}
-        href={href}
+        href={isLinkComponent ? undefined : href}
         rel={rel || isExternal ? 'noopener noreferrer' : undefined}
         target={target || isExternal ? '_blank' : undefined}
         disabled={disabled}

@@ -115,6 +115,7 @@ export function Error({ error }) {
                     className={styles.button}
                     data-visible={visible}
                     href="/"
+                    external
                     icon="chevron-right"
                   >
                     Back to homepage

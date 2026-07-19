@@ -8,8 +8,9 @@ import {
   useLoaderData,
   useNavigation,
   useRouteError,
+  useInRouterContext,
 } from '@remix-run/react';
-import { createCookieSessionStorage, json } from '@remix-run/cloudflare';
+import { createCookieSessionStorage, json } from '@remix-run/node';
 import { ThemeProvider, themeStyles } from '~/components/theme-provider';
 import GothamBook from '~/assets/fonts/gotham-book.woff2';
 import GothamMedium from '~/assets/fonts/gotham-medium.woff2';
@@ -46,13 +47,13 @@ export const links = () => [
   { rel: 'author', href: '/humans.txt', type: 'text/plain' },
 ];
 
-export const loader = async ({ request, context }) => {
+export const loader = async ({ request }) => {
   const { url } = request;
   const { pathname } = new URL(url);
   const pathnameSliced = pathname.endsWith('/') ? pathname.slice(0, -1) : url;
   const canonicalUrl = `${config.url}${pathnameSliced}`;
 
-  const sessionSecret = context?.cloudflare?.env?.SESSION_SECRET || ' ';
+  const sessionSecret = process.env.SESSION_SECRET || ' ';
   const { getSession, commitSession } = createCookieSessionStorage({
     cookie: {
       name: '__session',
@@ -141,7 +142,20 @@ export default function App() {
 }
 
 export function ErrorBoundary() {
-  const error = useRouteError();
+  let error;
+  let inRouterContext = false;
+
+  try {
+    inRouterContext = useInRouterContext();
+  } catch (e) {
+    inRouterContext = false;
+  }
+
+  try {
+    error = useRouteError();
+  } catch (e) {
+    error = e;
+  }
 
   return (
     <html lang="en">
@@ -151,13 +165,23 @@ export function ErrorBoundary() {
         <meta name="theme-color" content="#111" />
         <meta name="color-scheme" content="dark light" />
         <style dangerouslySetInnerHTML={{ __html: themeStyles }} />
-        <Meta />
-        <Links />
+        {inRouterContext ? (
+          <>
+            <Meta />
+            <Links />
+          </>
+        ) : (
+          <title>Krish Agrawal | Error</title>
+        )}
       </head>
       <body data-theme="dark">
         <Error error={error} />
-        <ScrollRestoration />
-        <Scripts />
+        {inRouterContext && (
+          <>
+            <ScrollRestoration />
+            <Scripts />
+          </>
+        )}
       </body>
     </html>
   );

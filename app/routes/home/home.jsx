@@ -1,6 +1,6 @@
 import intelliqTexture from '~/assets/intelliq-homepage.jpg';
-import voiceCoachTexture from '~/assets/bert-sentiment-homepage.jpg';
-import bertSentimentTexture from '~/assets/voice-coach-homepage.jpg';
+import bertSentimentTexture from '~/assets/bert-sentiment-homepage.jpg';
+import voiceCoachTexture from '~/assets/voice-coach-homepage.jpg';
 import { Footer } from '~/components/footer';
 import { baseMeta } from '~/utils/meta';
 import { Intro } from './intro';

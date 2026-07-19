@@ -1,5 +1,7 @@
 import { useEffect } from 'react';
+import { createRemixStub } from '@remix-run/testing';
 import { ThemeProvider, themeStyles } from '../app/components/theme-provider';
+
 import '../app/reset.module.css';
 import '../app/global.module.css';
 import './preview.css';
@@ -12,11 +14,19 @@ export const decorators = [
       document.body.dataset.theme = theme;
     }, [theme]);
 
+    const RemixStub = createRemixStub([
+      {
+        path: '/*',
+        Component: Story,
+      },
+    ]);
+
     return (
       <ThemeProvider theme={theme}>
         <style>{themeStyles}</style>
+
         <div id="story-root" className="storyRoot">
-          <Story />
+          <RemixStub />
         </div>
       </ThemeProvider>
     );
