@@ -2,20 +2,20 @@
   <img src="/public/favicon.svg" width="90" alt="Krish Agrawal Logo" />
 </p>
 
-<h1 align="center">
+<h1 align="left">
   Krish Agrawal — Developer Portfolio
 </h1>
 
-<p align="center">
+<p align="left">
   <b>AI • Machine Learning • NLP • Full-Stack Development</b>
 </p>
 
-<p align="center">
+<p align="left">
   A modern, responsive portfolio website showcasing my projects, technical expertise, 
   research interests, and journey as a Computer Science student building intelligent applications.
 </p>
 
-<p align="center">
+<p align="left">
   <a href="https://krishagrawal23.vercel.app">
     🌐 Live Website
   </a>
@@ -27,14 +27,6 @@
   <a href="https://www.linkedin.com/in/krishagrawal75/">
     🔗 LinkedIn
   </a>
-</p>
-
-<p align="center">
-  <img src="https://img.shields.io/badge/React-18+-61DAFB?style=for-the-badge&logo=react&logoColor=black"/>
-  <img src="https://img.shields.io/badge/Remix-000000?style=for-the-badge&logo=remix&logoColor=white"/>
-  <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white"/>
-  <img src="https://img.shields.io/badge/Three.js-black?style=for-the-badge&logo=three.js&logoColor=white"/>
-  <img src="https://img.shields.io/badge/Vercel-Deployed-black?style=for-the-badge&logo=vercel"/>
 </p>
 
 ---
@@ -105,4 +97,26 @@ It combines a clean user interface with smooth animations, responsive layouts, a
 
 ---
 
-# 📂 Project Structure
+# 🙌 Thank You For Visiting
+
+Thank you for taking the time to explore my portfolio repository.
+
+I hope you enjoyed discovering my projects, skills, and journey in 
+AI, Machine Learning, NLP, and Full-Stack Development.
+
+✨ Feel free to explore the code, share feedback, or connect with me.
+
+<p align="center">
+  🚀 Visit my portfolio:  
+  <a href="https://krishagrawal23.vercel.app">
+    krishagrawal23.vercel.app
+  </a>
+</p>
+
+<p align="center">
+  ⭐ If you found this project interesting, consider giving it a star!
+</p>
+
+---
+
+
