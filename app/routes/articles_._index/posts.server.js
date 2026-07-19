@@ -1,33 +1,21 @@
-import fs from 'node:fs';
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
-import { formatTimecode, readingTime } from '~/utils/timecode';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
 export async function getPosts() {
   const modules = import.meta.glob('../articles.*.mdx', { eager: true });
   const build = await import('virtual:remix/server-build');
 
-  const posts = await Promise.all(
-    Object.entries(modules).map(async ([file, post]) => {
-      let id = file.replace('../', 'routes/').replace(/\.mdx$/, '');
-      let slug = build.routes[id].path;
-      if (slug === undefined) throw new Error(`No route for ${id}`);
+  const posts = Object.entries(modules).map(([file, post]) => {
+    const id = file.replace('../', 'routes/').replace(/\.mdx$/, '');
+    const slug = build.routes[id].path;
 
-      const filePath = path.resolve(__dirname, file);
-      const text = fs.readFileSync(filePath, 'utf-8');
-      const readTime = readingTime(text);
-      const timecode = formatTimecode(readTime);
+    if (!slug) {
+      throw new Error(`No route for ${id}`);
+    }
 
-      return {
-        slug,
-        timecode,
-        frontmatter: post.frontmatter,
-      };
-    })
-  );
+    return {
+      slug,
+      timecode: post.frontmatter.readingTime ?? '',
+      frontmatter: post.frontmatter,
+    };
+  });
 
   return sortBy(posts, post => post.frontmatter.date, 'desc');
 }
