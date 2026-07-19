@@ -1,56 +1,93 @@
 <p align="center">
-  <img src="/public/favicon.svg" width="50" alt="Logo" />
+  <img src="/public/favicon.svg" width="64" alt="Logo" />
 </p>
-<h1 align="center">Personal portfolio</h1>
 
-[![Site preview](/public/site-preview.png)](https://hamishw.com)
+<h1 align="center">Krish Agrawal Portfolio</h1>
 
-My design portfolio to showcase a few projects. Built with [Remix](https://remix.run/), [Three.js](https://threejs.org/), and [Framer Motion](https://www.framer.com/motion/). View the [live site](https://hamishw.com) or check out a live version of the [components storybook](https://storybook.hamishw.com).
+<p align="center">
+  A modern, responsive developer portfolio showcasing my projects, skills, and experience in AI, Machine Learning, NLP, and Full-Stack Development.
+</p>
 
-## Install & run
+<p align="center">
+  <a href="https://YOUR-PORTFOLIO.vercel.app">🌐 Live Demo</a> •
+  <a href="https://github.com/krishagrawal623/my-portfolio-website">📂 Source Code</a>
+</p>
 
-Make sure you have nodejs `19.9.0` or higher and npm `9.6.3` or higher installed. Install dependencies with:
+---
+
+## ✨ Features
+
+- Responsive modern UI
+- Smooth animations
+- Dark & Light themes
+- Project showcase
+- Skills section
+- Experience timeline
+- Contact form
+- Optimized performance
+
+---
+
+## 🛠️ Tech Stack
+
+- React
+- Remix
+- TypeScript
+- Three.js
+- Framer Motion
+- CSS Modules
+
+---
+
+## 🚀 Getting Started
+
+Clone the repository:
+
+```bash
+git clone https://github.com/krishagrawal623/my-portfolio-website.git
+```
+
+Install dependencies:
 
 ```bash
 npm install
 ```
 
-Once it's done start up a local server with:
+Run the development server:
 
 ```bash
 npm run dev
 ```
 
-To view the components storybook:
+---
+
+## 📦 Build
 
 ```bash
-npm run dev:storybook
+npm run build
 ```
 
-## Deployment
+---
 
-I've set up the site using Cloudflare for hosting. Deploy the site to Cloudflare Pages:
+## 🚀 Deployment
 
-```bash
-npm run deploy
-```
+Deploy using your preferred platform such as:
 
-## Permissions
+- Vercel
+- Cloudflare Pages
+- Netlify
 
-I'm cool with anyone using the code or parts of the code for their own site, it is open source so people can learn from it and adapt it. However, I would encourage you to modify the theme and components it to make it your own. If you are using the site's design largely unmodified, I'd appreciate being credited as the designer of the website.
+---
 
-I do not give permission to present any of my projects as your own (this is being actively used as my portfolio site and these are my real projects I've worked on).
+## 🙏 Credits
 
-## FAQs
+This portfolio is **based on the open-source portfolio template created by Hamish Williams** and has been customized with my own content, projects, styling, and additional features.
 
-<details>
-  <summary>How do I change the color on the <code>DisplacementSphere</code> (blobby rotating thing in the background).</summary>
-  
-  You'll need to edit the fragment shader. [Check out this issue for more details](https://github.com/HamishMW/portfolio/issues/19#issuecomment-870996615).
-</details>
+Original repository:
+https://github.com/HamishMW/portfolio
 
-<details>
-  <summary>How do I get the contact form to work?</summary>
-  
-  To get the contact form working create an AWS account and set up SES (Simple Email service). Then plug in your details into `.dev.vars.example` and rename it to `.dev.vars`. You'll also need to add these as enviroment variables in the Cloudflare dashboard for it to work in production. Or if you don't mind sending through gmail use [nodemailer](https://nodemailer.com/) instead.
-</details>
+---
+
+## 📄 License
+
+This project is licensed under the MIT License. Please refer to the LICENSE file for details.
