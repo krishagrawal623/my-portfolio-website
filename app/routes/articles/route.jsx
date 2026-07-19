@@ -4,10 +4,18 @@ import { MDXProvider } from '@mdx-js/react';
 import { Post, postMarkdown } from '~/layouts/post';
 import { baseMeta } from '~/utils/meta';
 import config from '~/config.json';
+const modules = import.meta.glob('../articles.*.mdx', { eager: true });
 
 export async function loader({ request }) {
   const slug = request.url.split('/').at(-1);
-  const module = await import(`../articles.${slug}.mdx`);
+  const module = Object.entries(modules).find(([file]) => {
+    return file.replace('../', '').replace(/\.mdx$/, '') === `articles.${slug}`;
+  })?.[1];
+
+  if (!module) {
+    throw new Response('Not Found', { status: 404 });
+  }
+
   const ogImage = `${config.url}/static/${slug}-og.jpg`;
 
   return json({

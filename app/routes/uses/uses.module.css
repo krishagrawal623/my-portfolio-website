@@ -3,16 +3,16 @@
 }
 
 .section {
-  opacity: 0;
+  opacity: 1;
   padding-top: var(--spaceXL);
   padding-bottom: var(--spaceXL);
   margin-top: var(--spaceXL);
 
   &:global {
-    animation: fade-in 1s ease 1s forwards;
+    animation: fade-in 1s ease 1s;
   }
 
-  + & {
+  +& {
     margin-top: 0;
   }
 }
@@ -53,8 +53,8 @@
   height: 100%;
   box-sizing: border-box;
   transition: transform var(--durationM) var(--bezierFastoutSlowin),
-              border-color var(--durationM) var(--bezierFastoutSlowin),
-              box-shadow var(--durationM) var(--bezierFastoutSlowin);
+    border-color var(--durationM) var(--bezierFastoutSlowin),
+    box-shadow var(--durationM) var(--bezierFastoutSlowin);
 
   &:hover {
     transform: translateY(-5px);
@@ -91,7 +91,7 @@
   background-color: color-mix(in lab, var(--primary) 8%, transparent);
   color: var(--primary);
   transition: transform var(--durationM) var(--bezierFastoutSlowin),
-              background-color var(--durationM) var(--bezierFastoutSlowin);
+    background-color var(--durationM) var(--bezierFastoutSlowin);
 
   .exploringCard & {
     background-color: color-mix(in lab, var(--accent) 8%, transparent);

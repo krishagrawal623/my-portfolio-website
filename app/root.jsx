@@ -62,7 +62,9 @@ export const loader = async ({ request }) => {
       path: '/',
       sameSite: 'lax',
       secrets: [sessionSecret],
-      secure: new URL(request.url).protocol === 'https:',
+      secure:
+        new URL(request.url).protocol === 'https:' ||
+        request.headers.get('x-forwarded-proto') === 'https',
     },
   });
 
