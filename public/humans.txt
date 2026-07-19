@@ -1,0 +1,47 @@
+__  __  __
+\ \ \ \ \/
+ \ \/\ \
+  \/  \/
+
+Krish Agrawal
+Designer & Frontend Developer
+
+Design:
+- UI/UX Design
+- Interaction Design
+- Creative Development
+
+Development:
+- React
+- Remix
+- Three.js
+- Framer Motion
+
+Tools:
+- Figma
+- Visual Studio Code
+- Git
+
+GitHub: https://github.com/krishagrawal623
+LinkedIn: https://linkedin.com/in/krishagrawal75
+
+-------------------------------------------------------------------------------
+
+/* TECHNOLOGY */
+
+Frontend:
+- React
+- Remix
+
+Graphics & Animation:
+- Three.js
+- Framer Motion
+
+-------------------------------------------------------------------------------
+
+/* ABOUT */
+
+Designed and developed by Krish Agrawal.
+Built with a focus on performance, accessibility, and modern web technologies.
+
+Thanks for taking a look.

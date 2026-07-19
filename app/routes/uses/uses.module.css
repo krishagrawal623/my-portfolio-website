@@ -1,0 +1,207 @@
+.uses {
+  --maxWidthL: var(--maxWidthXL);
+}
+
+.section {
+  opacity: 0;
+  padding-top: var(--spaceXL);
+  padding-bottom: var(--spaceXL);
+  margin-top: var(--spaceXL);
+
+  &:global {
+    animation: fade-in 1s ease 1s forwards;
+  }
+
+  + & {
+    margin-top: 0;
+  }
+}
+
+.techGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spaceL);
+  width: 100%;
+  margin-top: var(--spaceXL);
+
+  @media (--mediaTablet) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media (--mediaLaptop) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  @media (min-width: 1300px) {
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  @media (min-width: 1600px) {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+.techCard,
+.exploringCard {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--backgroundLight);
+  border: 1px solid color-mix(in lab, var(--text) 8%, transparent);
+  border-radius: 12px;
+  padding: var(--spaceL);
+  height: 100%;
+  box-sizing: border-box;
+  transition: transform var(--durationM) var(--bezierFastoutSlowin),
+              border-color var(--durationM) var(--bezierFastoutSlowin),
+              box-shadow var(--durationM) var(--bezierFastoutSlowin);
+
+  &:hover {
+    transform: translateY(-5px);
+    border-color: color-mix(in lab, var(--primary) 40%, transparent);
+    box-shadow: 0 12px 30px color-mix(in lab, var(--primary) 8%, transparent);
+  }
+}
+
+.exploringCard {
+  border: 1px dashed color-mix(in lab, var(--primary) 30%, transparent);
+  background-color: color-mix(in lab, var(--primary) 2%, var(--backgroundLight));
+
+  &:hover {
+    border-style: solid;
+    border-color: color-mix(in lab, var(--accent) 55%, transparent);
+    box-shadow: 0 12px 30px color-mix(in lab, var(--accent) 8%, transparent);
+  }
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--spaceM);
+}
+
+.iconWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+  background-color: color-mix(in lab, var(--primary) 8%, transparent);
+  color: var(--primary);
+  transition: transform var(--durationM) var(--bezierFastoutSlowin),
+              background-color var(--durationM) var(--bezierFastoutSlowin);
+
+  .exploringCard & {
+    background-color: color-mix(in lab, var(--accent) 8%, transparent);
+    color: var(--accent);
+  }
+}
+
+.techCard:hover .iconWrapper,
+.exploringCard:hover .iconWrapper {
+  transform: scale(1.1);
+  background-color: color-mix(in lab, var(--primary) 12%, transparent);
+}
+
+.techIcon {
+  font-size: 24px;
+}
+
+.badge {
+  font-size: 11px;
+  font-weight: var(--fontWeightBold);
+  padding: 3px 8px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background-color: color-mix(in lab, var(--text) 8%, transparent);
+  color: var(--textLight);
+
+  &[data-type='Daily'] {
+    background-color: color-mix(in lab, var(--primary) 12%, transparent);
+    color: var(--primary);
+  }
+
+  &[data-type='Favorite'] {
+    background-color: oklch(75% 0.16 330 / 12%);
+    color: oklch(75% 0.16 330);
+  }
+
+  &[data-type='AI'] {
+    background-color: oklch(80% 0.18 140 / 12%);
+    color: oklch(65% 0.18 140);
+  }
+
+  &[data-type='Backend'] {
+    background-color: oklch(70% 0.15 40 / 12%);
+    color: oklch(70% 0.15 40);
+  }
+
+  &[data-type='Production'] {
+    background-color: oklch(75% 0.14 280 / 12%);
+    color: oklch(75% 0.14 280);
+  }
+
+  &[data-type='Learning'] {
+    background-color: oklch(82% 0.14 90 / 12%);
+    color: oklch(72% 0.14 90);
+  }
+}
+
+.cardContent {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spaceXS);
+}
+
+.cardTitle {
+  font-size: var(--fontSizeBodyM);
+  font-weight: var(--fontWeightBold);
+  color: var(--textTitle);
+  margin: 0;
+}
+
+.cardDescription {
+  font-size: var(--fontSizeBodyS);
+  color: var(--textLight);
+  line-height: var(--lineHeightBody);
+  margin: 0;
+}
+
+.engineeringFocus {
+  margin-top: var(--spaceXL);
+  padding: var(--space2XL);
+  border-radius: 16px;
+  background-color: color-mix(in lab, var(--primary) 4%, var(--backgroundLight));
+  border: 1px solid color-mix(in lab, var(--primary) 15%, transparent);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 15px 40px color-mix(in lab, var(--primary) 5%, transparent);
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background-color: var(--primary);
+  }
+}
+
+.focusTitle {
+  margin-top: 0;
+  margin-bottom: var(--spaceM);
+  color: var(--textTitle);
+  font-size: var(--fontSizeH3);
+  font-weight: var(--fontWeightBold);
+}
+
+.focusText {
+  color: var(--textBody);
+  font-size: var(--fontSizeBodyM);
+  line-height: var(--lineHeightBody);
+  margin: 0;
+}
