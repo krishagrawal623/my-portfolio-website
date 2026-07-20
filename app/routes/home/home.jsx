@@ -126,8 +126,8 @@ export const Home = () => {
       <ProjectSummary
         id="project-2"
         alternate
-        sectionRef={projectThree}
-        visible={visibleSections.includes(projectThree.current)}
+        sectionRef={projectTwo}
+        visible={visibleSections.includes(projectTwo.current)}
         index={2}
         title="Sentiment Analysis using BERT"
         description="An NLP system using fine-tuned BERT for sentiment classification, featuring a FastAPI backend and React frontend."
@@ -148,8 +148,8 @@ export const Home = () => {
       />
       <ProjectSummary
         id="project-3"
-        sectionRef={projectTwo}
-        visible={visibleSections.includes(projectTwo.current)}
+        sectionRef={projectThree}
+        visible={visibleSections.includes(projectThree.current)}
         index={3}
         title="AI Voice Interview Coach"
         description="An AI-powered interview practice application using Streamlit, Whisper for speech transcription, and NLP tone analysis."
