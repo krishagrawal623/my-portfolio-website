@@ -34,4 +34,9 @@ export const socialLinks = [
     url: `https://www.linkedin.com/in/${config.linkedin}`,
     icon: 'linkedin',
   },
+  {
+    label: 'Twitter',
+    url: `https://twitter.com/${config.twitter}`,
+    icon: 'twitter',
+  },
 ];
