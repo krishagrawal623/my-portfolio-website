@@ -1,3 +1,4 @@
+import { Button } from '~/components/button';
 import { DecoderText } from '~/components/decoder-text';
 import { Heading } from '~/components/heading';
 import { Section } from '~/components/section';
@@ -110,6 +111,18 @@ export function Intro({ id, sectionRef, scrollIndicatorHidden, ...rest }) {
                   ))}
                 </div>
               </Heading>
+              <div className={styles.resumeButton}>
+                <Button
+                  secondary
+                  icon="download"
+                  href="/resume.pdf"
+                  target="_self"
+                  rel="noopener noreferrer"
+                  download
+                >
+                  Download Resume
+                </Button>
+              </div>
             </header>
             <RouterLink
               to="/#project-1"
