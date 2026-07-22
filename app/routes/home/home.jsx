@@ -112,7 +112,7 @@ export const Home = () => {
         buttonLink="https://github.com/krishagrawal623/stackoverflow-appwrite"
         model={{
           type: 'browser',
-          url: 'stackoverflow-appwrite.vercel.app',
+          url: 'stackoverflow-appwrite.app',
           alt: 'IntelliQ Q&A platform dashboard',
           textures: [
             {
